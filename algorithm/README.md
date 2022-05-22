@@ -1,2 +1,2 @@
-# daily-code
-daily code
+# algorithm
+algorithm
