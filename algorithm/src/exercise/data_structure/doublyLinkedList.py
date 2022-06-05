@@ -3,6 +3,17 @@ import queue
 import sys
 import math
 
+class Node:
+    key = 0
+    b = 0
+
+    def sum(self):
+        return self.a + self.b
+
+    def set(self, a, b):
+        self.a = a
+        self.b = b
+
 def insert():
     print(sys._getframe().f_code.co_name)
     
