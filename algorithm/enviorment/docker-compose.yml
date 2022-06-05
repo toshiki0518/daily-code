@@ -1,0 +1,16 @@
+version: '3'
+services:
+  # db:
+  #   image: postgres
+  web:
+    build: .
+    volumes:
+      - ../src:/home/app/src
+    ports:
+      - "8000:8000"
+    tty: true
+    # depends_on:
+    #   - db
+# memo 
+# docker ps -q get only container id 
+  
