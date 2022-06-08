@@ -8,6 +8,7 @@ class Binary:
     S = []
     n = 0
     T = []
+    test=[]
     q=0
     MAX_N = 10
     MAX_Q = 4
