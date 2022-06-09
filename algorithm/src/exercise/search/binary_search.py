@@ -3,11 +3,21 @@ import queue
 import sys
 import math
 import random
+import datetime
+import time
+"""
+n個の整数を含む数列Sとq個の異なる整数を含む数列Tを読み込み
+Tに含まれる整数の中でSに含まれるものの個数Cを出力するプログラム
 
+Returns:
+    _type_: _description_
+"""
+    
 class Binary:
     S = []
     n = 0
     T = []
+    test=[]
     q=0
     MAX_N = 10
     MAX_Q = 4
@@ -62,107 +72,80 @@ class Binary:
     def sum(self):
         return self.a + self.b
 
-    def liner_search(self):
-        searchTargetList = self.S
-        for i in range(self.n):
-            num = searchTargetList[i]
-
     def create_test_list(self):            
         return self.random_list(10, 10)
             
-    def liner_test1(self, key):
-        test_list = self.create_test_list()
-        print("key is %d" % key)
-        print('test_list is')
-        print(test_list)
-        compare = 0
-        for i in range(len(test_list)):
-            compare+=1
-            eq = test_list[i] == key
-            compare+=1
-            if eq:
-                return i
-        print ("compare times is %d" % compare)
-        return -1
-    
-    def liner_test2(self, key):
-        test_list = self.create_test_list()
-        test_list.append(key)
-        print("key is %d" % key)
-        print('test_list is')
-        print(test_list)
-
-        i = 0
-        n = len(test_list) - 1
-        
-        compare = 0
-        while test_list[i] != key:
-            compare += 1
-            i += 1
-        compare += 1
-        print ("compare times is %d" % compare)
-        if i == n:
-            # print('not found')
-            return -1
-        return i
-    
-    def liner_search1(self, key):
-        test_list = self.create_test_list()
-        print("key is %d" % key)
-        print('test_list is')
-        print(test_list)
-        compare = 0
-        for i in range(len(test_list)):
-            compare+=1
-            eq = test_list[i] == key
-            compare+=1
-            if eq:
-                return i
-        print ("compare times is %d" % compare)
-        return -1
-    
-    def liner_search2(self):
-        
+    def test_binary(self, key):
+        left = 0
+        right = self.n
         target_list = self.S
-        search_list = self.T
-        i = n = 0
-        answer=[]
-        for target in target_list:
-            i +=1
-            n=0
-            last_index = len(search_list)
-            search_list.append(target)
-            # print(search_list)
-            while target != search_list[n]:
-                n +=1
-            if n != last_index:
-                print("target is %d ,search is %d, n is %d" % (target, search_list[n], n))
-                answer.append(n)
+        print('key')
+        print(key)
+        while left < right :
+            mid = (left + right) / 2
+            mid = math.floor(mid)
+            print('mid is %d' % mid)
+            print('target_list[mid] is %d' % target_list[mid])
+            if target_list[mid] == key:
+                print('mid')
+                return mid
+            elif key < target_list[mid]:
+                print('right')
+                right = mid
             else:
-                answer.append(-1)            
-        return answer
-    
-    def set(self, a, b):
-        self.a = a
-        self.b = b
+                print('left')
+                left = mid + 1
+        return -1
+            
 
+    def binary_search(self, key):
+        left = 0
+        right = self.n
+        target_list = self.S
+        # print('key')
+        # print(key)
+        while left < right :
+            mid = (left + right) / 2
+            mid = math.floor(mid)
+            # print('mid is %d' % mid)
+            # print('target_list[mid] is %d' % target_list[mid])
+            if target_list[mid] == key:
+                # print('mid')
+                return mid
+            elif key < target_list[mid]:
+                # print('right')
+                right = mid
+            else:
+                # print('left')
+                left = mid + 1
+        return -1
+            
+
+    def exec(self):
+        search_list = self.T
+        result_list = []
+        for search in search_list:
+            result = self.binary_search(search)
+            result_list.append(result)
+        print('result is ')
+        print(result_list)
+        
 def test():
     print(sys._getframe().f_code.co_name)
-    liner = Liner(5, 3)
-    # result = liner.liner_test1(11)
-    # print('error test result is ')
-    # print(result)
-    result = liner.liner_test1(11)
-    print("test result1 is %d" % result)
-    result = liner.liner_test2(11)
-    print("test resul2 is %d" % result)    
+    binary = Binary(10,3)
+    result = binary.test_binary(12)
+    print(result)
+    
     
 def main():
     print('start')
-    liner = Liner(5, 3)
-    answer = liner.liner_search2()
-    print('answer is ')
-    print(answer)
+    start_time = time.time()
+    print(start_time)
+    # test()
+    binary = Binary(5, 3)
+    binary.exec()
+    end_time = time.time()
+    print(end_time - start_time)
     print('end')
         
     
