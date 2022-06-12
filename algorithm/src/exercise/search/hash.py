@@ -7,28 +7,62 @@ import datetime
 import time
 
     
+"""ハッシュテーブルを用いてデータの検索を高速化します。
+計算量:O(n)
+ハッシュ値の衝突=keyが同一になる
+ダブルハッシュを用いたオープンアドレス法
+"""
 class Disctionary:
-    S = []
-    n = 0
-    T = []
-    page=dict()
-    q=0
-    MAX_N = 10
-    MAX_Q = 4
-
-    def __init__(self, n = 10, q = 5):
-        test
+    dict={}
+    dict_max = 10000
+    
+    
+    def change_int(self, str):
+        if str == 'A' : return 1
+        if str == 'C' : return 2
+        if str == 'G' : return 3
+        if str == 'T' : return 4
+        return 0
+        
+    def create_key(self, str):
+        str_list = list('str')
+        sum = 0
+        p=1
+        for char in len(str_list):
+            print(char)
+            sum += p*self.change_int(char)
+        return sum
         
     def insert(self, str):
-        self.page.append()
+        key = self.create_key(str)
+        self.dict[key] = str
+        print(self.dict)
         
+    def find(self, str):
+        val = self.dict.get(str)
+        print(val)
+
+    def check(self, str):
+        print(self.dict)
+
+def sample():
+    hash_dict = Disctionary()
+    hash_dict.insert('AAA')
+    hash_dict.insert('AAC')
+    hash_dict.find('AAA')
+    hash_dict.find('CCC')
+    hash_dict.insert('CCC')
+    hash_dict.find('CCC')
+    
+            
 def main():
     print('start')
     start_time = time.time()
     print(start_time)
     # test()
-    binary = Binary(5, 3)
-    binary.exec()
+    sample()
+    hash_dict = Disctionary()
+    # binary.exec()
     end_time = time.time()
     print(end_time - start_time)
     print('end')
