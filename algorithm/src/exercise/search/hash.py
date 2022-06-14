@@ -15,18 +15,28 @@ import time
 """
 class Disctionary:
     dict={}
-    dict_max = 0
+    dict_max = 100
+    command_max = 0
     
 
-    def __init__(self):
-        self.dict_max = int(input('input number'))
-        self.create_dict()
+    def __init__(self, length = None):
+        try:
+            if length is not None:
+                self.command_max = length
+            else:
+                self.command_max = int(input('input number '))
+                if(self.command_max > self.dict_max):
+                    self.command_max = self.dict_max
+        except Exception as e:
+            print(e)
+        else:
+            self.create_dict()
         
     def create_dict(self):
         """
         空の辞書を生成
         """
-        for index in range(self.dict_max):
+        for index in range(self.command_max):
             self.dict[index] = None
         print('len(self.dict) is %d' % len(self.dict))
         
@@ -49,44 +59,83 @@ class Disctionary:
     def hash1(self, key):
         return key % len(self.dict)
         
-    def hash2s(self, key):
+    def hash2(self, key):
         return 1 + (key % (len(self.dict) - 1) )
         
+
+    def create_hash_key(self, key, index):
+        print('key %d, index %d' % (key, index))
+        """_summary_
+
+        Args:
+            key (int): _description_
+            index (int): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        key1 = self.hash1(key) + index
+        key2 = self.hash2(key)
+        hash_key = (key1 * key2) % len(self.dict)
+        print('hash_key %d, key %d' % (hash_key, key))
+        return hash_key
+    
     def insert(self, str):
-        key = self.change_key_int(str)
-        # while True:            
-        self.dict[key] = str
-        print(self.dict)
-        
+        result, hash = self.find(str) 
+        if result:
+            self.dict[hash] = str
+            
     def find(self, str):
-        val = self.dict.get(str)
-        print(val)
+        key = self.change_key_int(str)
+        cnt = 0
+        while True:
+            h = self.create_hash_key(key, cnt)
+            if self.dict[h] == str:
+                # 重複
+                return True, 1
+            if self.dict[h] is None or len(self.dict[h]) == 0:
+                # 取得できないなら
+                return False, 0
+            cnt += 1
+            # return False,0
 
     def check(self, str):
         print(self.dict)
 
-    def sample(self):
-        hash_dict = self
-        
-        hash_dict.insert('AAA')
-        hash_dict.insert('AAC')
-        hash_dict.find('AAA')
-        hash_dict.find('CCC')
-        hash_dict.insert('CCC')
-        hash_dict.find('CCC')
-    
+    def exec_command(self, command, value):
+        print('command %s, value %s' % (command, value))
+        if command.startswith('insert'):
+            print('insert is %s' % command)
+            self.insert(value)
+        else:
+            print('find is %s' % command)
+            self.find(value)
+            
+def sample():
+    inputs = [
+        'insert AAA',
+        'insert AAC',
+        'find AAA',
+        'find CCC',
+        'insert CCC',
+        'find CCC',
+    ]
+    sample_dict = Disctionary(len(inputs))
+    for input in inputs:
+        command, value = input.split()
+        sample_dict.exec_command(command, value)
             
 def main():
     print('start')
     start_time = time.time()
     print(start_time)
-    # test()
-    hash_dict = Disctionary()
-    hash_dict.sample()
-    
-    hash_dict = Disctionary()
-    # binary.exec()
+    sample()
+    # hash_dict = Disctionary()
+    # for n in range(len(hash_dict.dict)):
+    #     command, value = input('input command ').split()
+    #     hash_dict.exec_command(command, value)
     end_time = time.time()
+    print(end_time)
     print(end_time - start_time)
     print('end')
         
