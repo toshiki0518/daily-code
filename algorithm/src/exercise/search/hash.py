@@ -52,7 +52,6 @@ class Disctionary:
         sum = 0
         p=1
         for char in str:
-            print(char)
             sum += p*self.change_int(char)
         return sum
         
@@ -64,7 +63,6 @@ class Disctionary:
         
 
     def create_hash_key(self, key, index):
-        print('key %d, index %d' % (key, index))
         """_summary_
 
         Args:
@@ -77,13 +75,16 @@ class Disctionary:
         key1 = self.hash1(key) + index
         key2 = self.hash2(key)
         hash_key = (key1 * key2) % len(self.dict)
-        print('hash_key %d, key %d' % (hash_key, key))
+        # print('hash_key %d, key %d, index %d' % (hash_key, key, index))
         return hash_key
     
     def insert(self, str):
         result, hash = self.find(str) 
+        print(result)
+        print(hash)
         if result:
-            self.dict[hash] = str
+            # self.dict[hash] = str
+            self.dict.update(hash=str)
             
     def find(self, str):
         key = self.change_key_int(str)
@@ -92,10 +93,10 @@ class Disctionary:
             h = self.create_hash_key(key, cnt)
             if self.dict[h] == str:
                 # 重複
-                return True, 1
+                return True, h
             if self.dict[h] is None or len(self.dict[h]) == 0:
                 # 取得できないなら
-                return False, 0
+                return False, h
             cnt += 1
             # return False,0
 
@@ -103,12 +104,10 @@ class Disctionary:
         print(self.dict)
 
     def exec_command(self, command, value):
-        print('command %s, value %s' % (command, value))
+        # print('command %s, value %s' % (command, value))
         if command.startswith('insert'):
-            print('insert is %s' % command)
             self.insert(value)
         else:
-            print('find is %s' % command)
             self.find(value)
             
 def sample():
@@ -119,12 +118,18 @@ def sample():
         'find CCC',
         'insert CCC',
         'find CCC',
+        'insert AC',
+        'insert G',
+        'find AC',
+        'find G',
     ]
     sample_dict = Disctionary(len(inputs))
     for input in inputs:
         command, value = input.split()
         sample_dict.exec_command(command, value)
             
+    print(sample_dict.dict)
+    
 def main():
     print('start')
     start_time = time.time()
