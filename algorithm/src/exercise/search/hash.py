@@ -17,6 +17,7 @@ class Disctionary:
     dict={}
     dict_max = 100
     command_max = 0
+    find_list={}
     
 
     def __init__(self, length = None):
@@ -75,22 +76,22 @@ class Disctionary:
         key1 = self.hash1(key) + index
         key2 = self.hash2(key)
         hash_key = (key1 * key2) % len(self.dict)
-        # print('hash_key %d, key %d, index %d' % (hash_key, key, index))
         return hash_key
     
     def insert(self, str):
-        result, hash = self.find(str) 
-        print(result)
-        print(hash)
-        if result:
-            # self.dict[hash] = str
-            self.dict.update(hash=str)
+        isFound, hash = self.find(str) 
+        # print(isFound)
+        # print(hash)
+        if not isFound:
+            self.dict[hash] = str
+            # self.dict.update(hash=str)
             
     def find(self, str):
         key = self.change_key_int(str)
         cnt = 0
         while True:
             h = self.create_hash_key(key, cnt)
+            print('h %d, key %d, cnt %d, str %s' % (h, key, cnt, str))
             if self.dict[h] == str:
                 # 重複
                 return True, h
