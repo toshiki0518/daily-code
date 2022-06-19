@@ -24,7 +24,9 @@ class Logistics:
     dict_max = 100
     command_max = 0
     find_list={}
-    
+    n=0
+    k=0
+    list=[]
 
     def __init__(self, length = None):        
         self.quantity = int(input('inuput quantity '))
@@ -45,10 +47,17 @@ class Logistics:
                 self.luggage.append(luggage_weight)
         # print('total_weight %d / self.unit_count %d' % (total_weight, self.unit_count))
         self.weight_average = total_weight / self.unit_count
+        print('total_weight %d / self.unit_count %d, self.weight_average%d' % (total_weight, self.unit_count, self.weight_average))
         print(self.luggage)
         
     def sample(self):
         self.calc_laggeage()
+        self.load_luggage()
+        print(self.truck)
+        print(self.max_loadage)
+            
+    def check(self):
+        self.calc_laggeage(self.quantity)
         self.load_luggage()
         print(self.truck)
         print(self.max_loadage)
@@ -62,11 +71,12 @@ class Logistics:
                 continue
             # 次のトラックへ
             self.truck[track_number] = weight
-            weight = 0 if is_use is True else luggage
-            # print('track_number %d, weight %d' % (track_number, weight))
+            # print('track_number %d, weight %d, luggage %d' % (track_number, weight, luggage))
+            weight = 0 if is_use is False else luggage
+            print('track_number %d, weight %d, luggage %d' % (track_number, weight, luggage))
             track_number+=1
         
-    def calc_loadage(self, weight, luggae):
+    def calc_loadage(self, weight, luggage):
         """
         最大積載量を計算する
         すべての重さの荷物 / トラック台数:ng
@@ -77,20 +87,20 @@ class Logistics:
 
         Args:
             weight (_type_): _description_
-            luggae (_type_): _description_
+            luggage (_type_): _description_
 
         Returns:
             _type_: _description_
         """
-        after_weight = weight + luggae
+        after_weight = weight + luggage
         if after_weight >= self.weight_average :
-            print('luggae %d, after_weight %d' % (luggae, after_weight))
+            print('weight %d, luggage %d, after_weight %d' % (weight, luggage, after_weight))
             diff_after_weight = after_weight - self.weight_average
             diff_weight = self.weight_average - weight
             result=0
             print('diff_after_weight %d, diff_weight %d ' % (diff_after_weight, diff_weight))
             use_before = False
-            if diff_after_weight <= diff_weight:
+            if diff_after_weight < diff_weight:
                 result = after_weight
                 use_before = False
             else:
@@ -102,12 +112,50 @@ class Logistics:
             return use_before, result
         return None, after_weight
             
+    def answer(self):
+        for i in range(self.quantity):
+            # print(i)
+            kg = int(input('input weight:'))
+            self.list.append(kg)
+        ans = self.solve()
+        print('answer is %d' % ans)
+        
+    def solve(self):
+        left = 0
+        right = 100000 * 10000
+        mid: int
+        while (right - left) > 1:
+            mid = (left + right) /2 
+            print('right:%d,left:%d,mid:%d' % (right,left,mid))
+            val = self.calc(mid) # mid == 最大積載量
+            print('val:%d' % (val))
+            if( val >= self.quantity):
+                right = mid
+            else:
+                left = mid
+        return right
+        
+    def calc(self, loadage):
+        i = 0
+        for j in range(self.unit_count):
+            s = 0
+            while (s + self.list[i] <= loadage):
+                s += self.list[i]
+                i += 1
+                print('j:%d,i:%d,s:%d,loadage:%d' % (j,i,s,loadage))
+                if i == self.quantity:
+                    return self.quantity
+        print('i:%d' % (i))
+        return i
+        
 def main():
     print('start')
     start_time = time.time()
     print(start_time)
     logistics = Logistics()
-    logistics.sample()
+    # logistics.sample()
+    # logistics.check()
+    logistics.answer()
     end_time = time.time()
     print(end_time)
     print(end_time - start_time)
