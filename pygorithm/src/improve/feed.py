@@ -72,8 +72,27 @@ class Calc:
             result = 1
         else:
             result = n * self.factorial2(n-1)
-        print("result:{},n:{}".format(result,n))
         return result
+        
+    def serial_factorial2(self):
+        for i in range(21):
+            result = self.factorial2(i)
+            print('i:{} result:{}'.format(i, result))
+        
+    def practice1(self):
+        a=[10, -5, 0, 29, 6, 2, 77, 8]
+        is_odd=''
+        for n in a:
+            if n % 2 == 0:
+                is_odd='偶数'
+            else:
+                is_odd='奇数'                
+            print("n:{}は{}です".format(n % 2, is_odd))
+                        
+    def practice2(self):
+        for n in range(1,6):
+            diff = (3 ** n) - (2 ** n)
+            print("diff:{}".format(diff))
         
 def main():
     print('main')
@@ -83,8 +102,13 @@ def main():
     # result = calc.kk()
     # print('kk result is ', result)
     # calc.prime_number()
-    result = calc.factorial2()
-    print('factorial result is ', result)
+    # result = calc.factorial2()
+    # print('factorial result is ', result)
+    # calc.serial_factorial2()
+    calc.practice1()
+    calc.practice2()
+
+    
     
     
 if __name__ =='__main__':
