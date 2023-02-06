@@ -12,3 +12,4 @@ RUN apt-get install -y pip
 RUN pip install matplotlib
 RUN pip --version
 WORKDIR /home/app/src
+RUN apt-get install -y vim
