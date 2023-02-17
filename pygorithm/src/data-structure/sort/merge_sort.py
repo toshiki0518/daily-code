@@ -30,10 +30,14 @@ def merge_sort(list):
                 print('left right')
                 print(left, right, list)
             else:
+            # 左が大きかったら
+                # 右をのものを移動
                 list[list_i] = right[right_i]
+                # 右のリストのインデックスを移動
                 right_i += 1
                 print('list right')
                 print(left, right, list)
+            # 右のリストのインデックスを移動
             list_i += 1
 
         while left_i < len(left):
