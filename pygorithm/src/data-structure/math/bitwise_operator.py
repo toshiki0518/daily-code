@@ -8,13 +8,16 @@
 # print(val1)
 # print(val2)
 # print(0b10 & 0b11)
-# print(2 & 3)
+# print(5 & 2)
 # print(2 | 3)
 
 def is_odd(n):
     return n & 1
 
-print(is_odd(11))
+print(is_odd(2))
+print(is_odd(3))
+print(is_odd(5))
+print(is_odd(9))
 
 def is_power(n):
     return n & (n - 1) == 0
