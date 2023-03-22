@@ -39,10 +39,10 @@ def move_zeros(nums):
     zero_index = 0
     for index, x in enumerate(nums):
         if x != 0:
+            print(index)
+            print(nums)
             nums[zero_index] = x
             if zero_index != index:
-                print(index)
-                print(nums)
                 nums[index] = 0
             zero_index += 1
     return nums
