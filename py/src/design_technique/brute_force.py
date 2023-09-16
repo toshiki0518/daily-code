@@ -34,15 +34,16 @@ def closest_point():
     
 
 class BruteForce:
+    INF = 200000000
     def __init__(self) -> None:
         print("class:", self.__class__.__name__)
         self.random_integers = []
-        self.get_num_list()
+        self.random_integers = self.get_random_num_list()
 
-    def get_num_list(self):
+    def get_random_num_list(self):
         random_integers = [random.randint(1, 10) for _ in range(5)]
         print(random_integers)
-        self.random_integers = random_integers
+        return random_integers
 
     def get_value(self):
         if len(sys.argv) > 1:
@@ -56,7 +57,8 @@ class BruteForce:
             print('value error')
             return 0
 
-# python3 design_technique/brute_force.py 3
+# 
+
 class LinerSearch(BruteForce):
     """_summary_
 
@@ -67,17 +69,52 @@ class LinerSearch(BruteForce):
         super().__init__()
     
     def search(self):
+        found_id = self.found_id()
+        if found_id is None:
+            return False
+        return True
+
+    def found_id(self):
         search_value = self.get_value()
         print(search_value)
         for i in self.random_integers:
             if i == search_value:
-                return True
-        return False
+                return search_value
+        return None
+
+    def get_min_value(self):
+        min_value = self.random_integers[0]
+        for i in self.random_integers:
+            if min_value > i:
+                min_value = i
+        return min_value
+
+    def search_pair(self):
+        list1 = self.random_integers
+        list2 = super().get_random_num_list()
+        threshold = self.get_value()
+        min_value = self.INF
+        print("Thershold is %d." % (threshold))
+        for i in list1:
+            for j in list2:
+                target = i + j
+                if target < threshold:
+                    continue
+                if target < min_value:
+                    min_value = target
+                    print("Min value is %d." % (min_value))
+        return min_value
+
 
 def main():
     ls = LinerSearch()
-    result = ls.search()
+    # result = ls.search()
+    # result = ls.found_id()
+    # result = ls.get_min_value()
+    result = ls.search_pair()
     print(result)
+
+
 
 if __name__ == "__main__":
     # 自身のファイル名を取得し、表示する
