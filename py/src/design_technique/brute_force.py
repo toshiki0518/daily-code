@@ -105,6 +105,53 @@ class LinerSearch(BruteForce):
                     print("Min value is %d." % (min_value))
         return min_value
 
+# wip
+class BitSearch(BruteForce):
+    """partial sum
+
+    Args:
+        BruteForce (_type_): _description_
+    """
+    def __init__(self) -> None:
+        super().__init__()
+    
+    def search(self):
+        found_id = self.found_id()
+        if found_id is None:
+            return False
+        return True
+
+    def found_id(self):
+        search_value = self.get_value()
+        print(search_value)
+        for i in self.random_integers:
+            if i == search_value:
+                return search_value
+        return None
+
+    def get_min_value(self):
+        min_value = self.random_integers[0]
+        for i in self.random_integers:
+            if min_value > i:
+                min_value = i
+        return min_value
+
+    def search_pair(self):
+        list1 = self.random_integers
+        list2 = super().get_random_num_list()
+        threshold = self.get_value()
+        min_value = self.INF
+        print("Thershold is %d." % (threshold))
+        for i in list1:
+            for j in list2:
+                target = i + j
+                if target < threshold:
+                    continue
+                if target < min_value:
+                    min_value = target
+                    print("Min value is %d." % (min_value))
+        return min_value
+
 
 def main():
     ls = LinerSearch()
