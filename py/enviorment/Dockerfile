@@ -9,7 +9,10 @@ RUN apt update
 RUN apt-get install -y python3
 # RUN apt-get install apache2
 RUN apt-get install -y pip
-RUN pip install matplotlib
+# RUN python3 -m venv myenv
+# RUN source myenv/bin/activate
+# RUN pip install matplotlib
 RUN pip --version
 WORKDIR /home/app/src
 RUN apt-get install -y vim
+RUN PS1="\u\$ "
