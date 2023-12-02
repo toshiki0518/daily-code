@@ -164,7 +164,7 @@ class BitSearch(BruteForce):
 
 def exercise31():
     found_id = -1
-    a_list = [1 ,3, 4, 4 ,3]
+    a_list = [1 ,3, 4, 4 ,3 ,3 ,3 ,3, 2, 2, 2]
     v = 3
     for i in range(len(a_list)):
         if a_list[i] == v:
@@ -172,8 +172,23 @@ def exercise31():
             # break
     print(found_id)
 
+def exercise32():
+    """
+    Design an O(N) algorithm to determine 
+    how many integers are present among N integers a0, a1, ..., an-1.
+    """
+    inc_v = 0
+    v = 4
+    a_list = [1 ,3, 4, 4 ,3 ,3 ,3 ,3, 2, 2, 2]
+    for i in range(len(a_list)):
+        if a_list[i] == v:
+            inc_v = inc_v + 1
+            # break
+    print(inc_v)
+    
 def main():
-    exercise31()    
+    # exercise31()
+    exercise32()
     
 if __name__ == "__main__":
     # 自身のファイル名を取得し、表示する
