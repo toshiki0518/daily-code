@@ -3,40 +3,12 @@ import os
 import math
 import random
 
-def cal_dist(x1: float, y1: float, x2: float, y2: float):
-    print(x1,y1,x2,y2)
-    x = (x1 - x2 )
-    y = (y1 - y2 )
-    return math.sqrt(x**2 + y**2)
-    
 
-def closest_point():
-    n = get_value()  # 配列の長さ
-    x_list = []  # 空のリストを作成
-
-    # N個の要素を追加
-    for i in range(n):
-        x_list.append(i)
-
-    y_list = [i for i in range(n)]
-
-    minimun_dist: float = 10000000.0
-
-    for i in range(n):
-        for j in range(i + 1, n):
-            dist: float = cal_dist(x_list[i], y_list[i], x_list[j], y_list[j])
-            if dist <= minimun_dist:
-                minimun_dist = dist
-                # print(minimun_dist)
-    print(minimun_dist)
-
-
-    
 
 class BruteForce:
     INF = 200000000
     def __init__(self, is_unique = False, list_length = 5) -> None:
-        print("class:", self.__class__.__name__)
+        # print("class:", self.__class__.__name__)
         self.random_integers = []
         self.random_integers = self.get_random_num_list(is_unique, list_length)
 
@@ -152,93 +124,136 @@ class LinerSearch(BruteForce):
     def _bit_search(self):
         return 0        
         
-# wipdoc
-class BitSearch(BruteForce):
-    """partial sum
+class Challenge():
+    
+    def exercise31():
+        found_id = -1
+        a_list = [1 ,3, 4, 4 ,3 ,3 ,3 ,3, 2, 2, 2]
+        v = 3
+        for i in range(len(a_list)):
+            if a_list[i] == v:
+                found_id = i
+                # break
+        print(found_id)
 
-    Args:
-        BruteForce (_type_): _description_
-    """
-    def __init__(self) -> None:
-        super().__init__()
+    def exercise32():
+        """
+        Design an O(N) algorithm to determine 
+        how many integers are present among N integers a0, a1, ..., an-1.
+        """
+        inc_v = 0
+        v = 4
+        a_list = [1 ,3, 4, 4 ,3 ,3 ,3 ,3, 2, 2, 2]
+        for i in range(len(a_list)):
+            if a_list[i] == v:
+                inc_v = inc_v + 1
+                # break
+        print(inc_v)
+        
+    def exercise33(self):
+        """
+        Design an O(N) algorithm to find the maximum difference 
+        between any two distinct integers among N different integers, a0 through an-1.
+        """
+        brute_force = BruteForce(False, 10)
+        # get random integer array
+        a_list = brute_force.random_integers
+        max_difference = -1 * brute_force.INF
+        
+        print(a_list)
+        for i in range(len(a_list)):
+            for j in range(i + 1, len(a_list)):
+                calc_value = a_list[i] - a_list[j]
+                calc_value = abs(calc_value)
+                print("%d - %d = %d,differnce:%d." % (a_list[i] ,a_list[j], calc_value, max_difference))
+                if calc_value > max_difference:
+                    max_difference = calc_value
+        print("max value:%d" % max_difference)
+        
+        # for i in range(1, len(a_list)):
+        #     calc_value = a_list[i] - a_list[-1]
+        #     calc_value = abs(calc_value)
+        #     print("calc_value:%d,differnce:%d." % (calc_value, differnce))
+        #     if calc_value > differnce:
+        #         differnce = calc_value
+        # print(differnce)
 
-def exercise31():
-    found_id = -1
-    a_list = [1 ,3, 4, 4 ,3 ,3 ,3 ,3, 2, 2, 2]
-    v = 3
-    for i in range(len(a_list)):
-        if a_list[i] == v:
-            found_id = i
-            # break
-    print(found_id)
+    def exercise34(self):
+        """
+        Design an O(N) algorithm
+        to find the second smallest distinct integer among N different integers, where N >= 2.
+        """
+        liner_search = LinerSearch(False, 10)
+        # get random integer array
+        a_list = liner_search.random_integers
+        smallest_value = liner_search.INF
+        second_smallest_value = liner_search.INF
+        
+        print(a_list)
+        for v in a_list:
+            if v < smallest_value:
+                second_smallest_value = smallest_value
+                smallest_value = v
+            elif v < second_smallest_value and v != smallest_value:
+                smallest_value = v
+        print("second_smallest_value:%d" % second_smallest_value)
 
-def exercise32():
-    """
-    Design an O(N) algorithm to determine 
-    how many integers are present among N integers a0, a1, ..., an-1.
-    """
-    inc_v = 0
-    v = 4
-    a_list = [1 ,3, 4, 4 ,3 ,3 ,3 ,3, 2, 2, 2]
-    for i in range(len(a_list)):
-        if a_list[i] == v:
-            inc_v = inc_v + 1
-            # break
-    print(inc_v)
-    
-def exercise33():
-    """
-    Design an O(N) algorithm to find the maximum difference 
-    between any two distinct integers among N different integers, a0 through an-1.
-    """
-    brute_force = BruteForce(False, 10)
-    # get random integer array
-    a_list = brute_force.random_integers
-    max_difference = -1 * brute_force.INF
-    
-    print(a_list)
-    for i in range(len(a_list)):
-        for j in range(i + 1, len(a_list)):
-            calc_value = a_list[i] - a_list[j]
-            calc_value = abs(calc_value)
-            print("%d - %d = %d,differnce:%d." % (a_list[i] ,a_list[j], calc_value, max_difference))
-            if calc_value > max_difference:
-                max_difference = calc_value
-    print("max value:%d" % max_difference)
-    
-    # for i in range(1, len(a_list)):
-    #     calc_value = a_list[i] - a_list[-1]
-    #     calc_value = abs(calc_value)
-    #     print("calc_value:%d,differnce:%d." % (calc_value, differnce))
-    #     if calc_value > differnce:
-    #         differnce = calc_value
-    # print(differnce)
+    def is_even(self, num):
+        return num % 2 == 0
 
-def exercise34():
-    """
-    Design an O(N) algorithm
-    to find the second smallest distinct integer among N different integers, where N >= 2.
-    """
-    liner_search = LinerSearch(False, 10)
-    # get random integer array
-    a_list = liner_search.random_integers
-    smallest_value = liner_search.INF
-    second_smallest_value = liner_search.INF
-    
-    print(a_list)
-    for v in a_list:
-        if v < smallest_value:
-            second_smallest_value = smallest_value
-            smallest_value = v
-        elif v < second_smallest_value and v != smallest_value:
-            smallest_value = v
-    print("second_smallest_value:%d" % second_smallest_value)
-    
+    def exercise35(self):
+        """
+        Given N integers a0, a1, ..., an-1, 
+        perform the following operation repeatedly until it becomes impossible: 
+            replace each integer with its value divided by 2 if it is even.
+        Design an algorithm to determine how many times this operation will be performed.
+        """
+        is_unique = False
+        liner_search = LinerSearch(is_unique, 10)
+        divid_count = 0
+        original_list = liner_search.random_integers
+        a_list = liner_search.random_integers.copy()
+        has_not_odd = True
+        i = 0
+        # while has_not_odd:
+        #     v = a_list[i]
+        #     if self.is_even(v) is False:
+        #         has_not_odd = False
+        #         break
+        #     a_list[i] = v / 2
+        #     i = i + 1
+        #     if i >= len(a_list):
+        #         i = 0
+        #         divid_count = divid_count + 1
+
+        while True:
+            for i in range(len(a_list)):
+                if a_list[i] % 2 != 0:
+                    if divid_count > 0:
+                        print(original_list)
+                        print("divid_count:%d",divid_count)
+                        print(a_list)
+                    return divid_count
+                    # break
+                a_list[i] //= 2
+            divid_count += 1
+
+
+
+    def check_exercise35(self):
+        """
+        check logig about exercise35
+        """
+        while self.exercise35() <= 0:
+            continue
+
 def main():
-    # exercise31()
-    # exercise32()
-    # exercise33()
-    exercise34()
+    challenge = Challenge()
+    challenge.check_exercise35()
+    # challenge.exercise34()
+    # challenge.exercise33()
+    # challenge.exercise32()
+    # challenge.exercise31()
     
 if __name__ == "__main__":
     # 自身のファイル名を取得し、表示する
