@@ -126,7 +126,7 @@ class LinerSearch(BruteForce):
         
 class Challenge():
     
-    def exercise31():
+    def exercise31(self):
         found_id = -1
         a_list = [1 ,3, 4, 4 ,3 ,3 ,3 ,3, 2, 2, 2]
         v = 3
@@ -136,7 +136,7 @@ class Challenge():
                 # break
         print(found_id)
 
-    def exercise32():
+    def exercise32(self):
         """
         Design an O(N) algorithm to determine 
         how many integers are present among N integers a0, a1, ..., an-1.
@@ -229,7 +229,7 @@ class Challenge():
         while True:
             for i in range(len(a_list)):
                 if a_list[i] % 2 != 0:
-                    if divid_count > 0:
+                    if divid_count >= 1:
                         print(original_list)
                         print("divid_count:%d",divid_count)
                         print(a_list)
@@ -247,6 +247,7 @@ class Challenge():
         while self.exercise35() <= 0:
             continue
 
+# python3 chapter_exercises.py
 def main():
     challenge = Challenge()
     challenge.check_exercise35()
