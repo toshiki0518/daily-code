@@ -247,10 +247,59 @@ class Challenge():
         while self.exercise35() <= 0:
             continue
 
+    def exec_exercise36(self):
+        m = 10
+        n = 5
+        self.exercise36(m ,n)
+
+    def exercise36(self, m=10, n=5):
+        """
+        There are two integers, M and N.
+        Design an O(N^2) algorithm to
+        determine the number of integer solutions (X, Y, Z)
+        that satisfy the conditions 0 <= X, Y, Z <= M and X + Y + Z = N.
+        """
+        count = 0
+
+        for x in range(m + 1):
+            for y in range(m + 1):
+                z = n - x - y
+                if 0 <= z <= m:
+                    print(f"x:{x}, y:{y}, z:{z}")
+                    count += 1
+
+        print("Number of solutions:", count)
+        return count
+
+    def exercise36_wrong(self, m = 10, n = 5):
+        """
+        There are two integers, M and N. 
+        Design an O(N^2) algorithm to 
+        determine the number of integer solutions (X, Y, Z) 
+        that satisfy the conditions 0 <= X, Y, Z <= M and X + Y + Z = N.
+        """
+        """
+        Additionally, the algorithm in its current form has a time complexity of O(M^3), not O(N^2) as specified in the problem statement.
+        """
+        x = y = z =0
+
+        while x <= m:
+            while y <= m:
+                while z <= m:
+                    if x + y + z == n:
+                        print("x:%d,y:%d,z:%d",(x, y, z))
+                    z += 1
+                z = 0
+                y += 1
+            y = 0
+            x += 1
+            
+
 # python3 chapter_exercises.py
 def main():
     challenge = Challenge()
-    challenge.check_exercise35()
+    challenge.exec_exercise36()
+    # challenge.check_exercise35()
     # challenge.exercise34()
     # challenge.exercise33()
     # challenge.exercise32()
