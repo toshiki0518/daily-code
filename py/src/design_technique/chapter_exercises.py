@@ -186,9 +186,39 @@ def exercise32():
             # break
     print(inc_v)
     
+def exercise33():
+    """
+    Design an O(N) algorithm to find the maximum difference 
+    between any two distinct integers among N different integers, a0 through an-1.
+    """
+    brute_force = BruteForce(False, 10)
+    # get random integer array
+    a_list = brute_force.random_integers
+    max_difference = -1 * brute_force.INF
+    
+    print(a_list)
+    for i in range(len(a_list)):
+        for j in range(i + 1, len(a_list)):
+            calc_value = a_list[i] - a_list[j]
+            calc_value = abs(calc_value)
+            print("%d - %d = %d,differnce:%d." % (a_list[i] ,a_list[j], calc_value, max_difference))
+            if calc_value > max_difference:
+                max_difference = calc_value
+    print("max value:%d" % max_difference)
+    
+    # for i in range(1, len(a_list)):
+    #     calc_value = a_list[i] - a_list[-1]
+    #     calc_value = abs(calc_value)
+    #     print("calc_value:%d,differnce:%d." % (calc_value, differnce))
+    #     if calc_value > differnce:
+    #         differnce = calc_value
+    # print(differnce)
+
+    
 def main():
     # exercise31()
-    exercise32()
+    # exercise32()
+    exercise33()
     
 if __name__ == "__main__":
     # 自身のファイル名を取得し、表示する
