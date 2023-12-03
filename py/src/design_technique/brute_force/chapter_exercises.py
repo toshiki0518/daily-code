@@ -214,11 +214,31 @@ def exercise33():
     #         differnce = calc_value
     # print(differnce)
 
+def exercise34():
+    """
+    Design an O(N) algorithm
+    to find the second smallest distinct integer among N different integers, where N >= 2.
+    """
+    liner_search = LinerSearch(False, 10)
+    # get random integer array
+    a_list = liner_search.random_integers
+    smallest_value = liner_search.INF
+    second_smallest_value = liner_search.INF
+    
+    print(a_list)
+    for v in a_list:
+        if v < smallest_value:
+            second_smallest_value = smallest_value
+            smallest_value = v
+        elif v < second_smallest_value and v != smallest_value:
+            smallest_value = v
+    print("second_smallest_value:%d" % second_smallest_value)
     
 def main():
     # exercise31()
     # exercise32()
-    exercise33()
+    # exercise33()
+    exercise34()
     
 if __name__ == "__main__":
     # 自身のファイル名を取得し、表示する
