@@ -312,10 +312,21 @@ class Recrusive:
         print("value:%d",value)
         return value
 
+    def func3(self, N: int):
+        """
+        infinity loop
+        """
+        print("N:%d",N)
+        if N == 0 :
+            return 0
+        value = N + self.func3(N + 1)
+        print("value:%d",value)
+        return value
+
 # python3 chapter_exercises.py
 def main():
     recrusive = Recrusive()
-    basic = recrusive.func2(5)
+    basic = recrusive.func3(5)
     print("basic: %d",basic)
     
 if __name__ == "__main__":
