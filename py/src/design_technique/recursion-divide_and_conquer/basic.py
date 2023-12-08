@@ -323,6 +323,18 @@ class Recrusive:
         print("value:%d",value)
         return value
 
+    def func4(self, m, n):
+        """
+        GCD(m,n) = GCD(n,r)
+
+        Returns:
+            _type_: _description_
+        """
+        r = m % n
+        if r == 0:
+            return n
+        return self.func4(n, r)
+
 # python3 chapter_exercises.py
 def main():
     recrusive = Recrusive()
