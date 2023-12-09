@@ -330,6 +330,8 @@ class Recrusive:
         Returns:
             _type_: _description_
         """
+
+        print("m,n:{},{}".format(m,n))
         r = m % n
         if r == 0:
             return n
@@ -338,8 +340,13 @@ class Recrusive:
 # python3 chapter_exercises.py
 def main():
     recrusive = Recrusive()
-    basic = recrusive.func3(5)
-    print("basic: %d",basic)
+    gcd = recrusive.func4(99, 48)
+    print("gcd: {}".format(gcd))
+    gcd = recrusive.func4(84, 24)
+    print("gcd: {}".format(gcd))
+    
+    # basic = recrusive.func3(5)
+    # print("basic: %d",basic)
     
 if __name__ == "__main__":
     # 自身のファイル名を取得し、表示する
