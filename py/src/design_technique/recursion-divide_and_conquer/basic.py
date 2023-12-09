@@ -324,7 +324,9 @@ class Recrusive:
         return value
 
     def func4(self, m, n):
+
         """
+        greatest common divisor
         GCD(m,n) = GCD(n,r)
 
         Returns:
@@ -332,10 +334,11 @@ class Recrusive:
         """
 
         print("m,n:{},{}".format(m,n))
+        if n == 0:
+            return m
         r = m % n
-        if r == 0:
-            return n
         return self.func4(n, r)
+
 
 # python3 chapter_exercises.py
 def main():
