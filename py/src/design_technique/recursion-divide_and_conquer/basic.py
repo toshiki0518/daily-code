@@ -339,14 +339,27 @@ class Recrusive:
         r = m % n
         return self.func4(n, r)
 
+    def func5(self, n, position = ""):
+
+        """
+        fibo
+        """
+        print("position,n:{},{}".format(position,n))
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        return self.func5(n - 1, position + "left") + self.func5(n - 2, position + "right")
+
 
 # python3 chapter_exercises.py
 def main():
     recrusive = Recrusive()
-    gcd = recrusive.func4(99, 48)
-    print("gcd: {}".format(gcd))
-    gcd = recrusive.func4(84, 24)
-    print("gcd: {}".format(gcd))
+    recrusive.func5(6)
+    # gcd = recrusive.func4(99, 48)
+    # print("gcd: {}".format(gcd))
+    # gcd = recrusive.func4(84, 24)
+    # print("gcd: {}".format(gcd))
     
     # basic = recrusive.func3(5)
     # print("basic: %d",basic)
