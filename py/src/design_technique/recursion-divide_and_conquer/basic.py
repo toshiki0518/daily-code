@@ -2,7 +2,7 @@ import sys
 import os
 import math
 import random
-
+import numpy as np
 
 
 class BruteForce:
@@ -297,6 +297,7 @@ class Challenge():
 
 class Recrusive:
     def __init__(self) -> None:
+        self.func_cnt = 0
         pass
     
     def func(self, N: int):
@@ -341,21 +342,38 @@ class Recrusive:
 
     def func5(self, n, position = ""):
 
+        self.func_cnt += 1
         """
         fibo
         """
-        print("position,n:{},{}".format(position,n))
         if n == 0:
+            print("position,n,value:{},{},{}".format(position,n,0))
             return 0
         elif n == 1:
+            print("position,n,value:{},{},{}".format(position,n,1))
             return 1
-        return self.func5(n - 1, position + "left") + self.func5(n - 2, position + "right")
+        value = self.func5(n - 1, position + "left") + self.func5(n - 2, position + "right")
+        print("position,n,value:{},{},{}".format(position,n,value))
+        return value
+
+    def func6(self, n, position = ""):
+        num = 50
+        f = np.zeros(num)
+        f[0] = 0
+        f[1] = 1
+        for i in range(2, num):
+            f[i] = f[i - 1] + f[i -2]
+            print("n,f[n]:{},{}".format(i, f[i]))
+            self.func_cnt += 1
 
 
-# python3 chapter_exercises.py
+# python3 bacic.py
 def main():
     recrusive = Recrusive()
-    recrusive.func5(6)
+    recrusive.func6(6)
+    print("calc cnt:{}".format(recrusive.func_cnt))
+    # recrusive.func5(6)
+    # print("calc cnt:{}".format(recrusive.func_cnt))
     # gcd = recrusive.func4(99, 48)
     # print("gcd: {}".format(gcd))
     # gcd = recrusive.func4(84, 24)
