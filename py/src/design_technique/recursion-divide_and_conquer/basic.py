@@ -9,7 +9,7 @@ class Challenge():
         pass    
 
 
-class Recrusive:
+class Recursive:
     def __init__(self) -> None:
         self.func_cnt = 0
         self.answer_memos = [-1] * 50
@@ -107,7 +107,8 @@ class Recrusive:
 
 # python3 bacic.py
 def main():
-    recrusive = Recrusive()
+    # 
+    recrusive = Recursive()
     # recrusive.func7(49)
     recrusive.func7(6)
     print("calc cnt:{}".format(recrusive.func_cnt))
