@@ -71,7 +71,7 @@ class Recursive:
         value = self.func5(n - 1, position + "left") + self.func5(n - 2, position + "right")
         print("position,n,value:{},{},{}".format(position,n,value))
         return value
-
+# rest 
     def func6(self, n, position = ""):
         num = 50
         f = np.zeros(num)
