@@ -58,6 +58,7 @@ class Recursive:
 
     def func5(self, n, position = ""):
 
+        print("call func5:{}".format(n))
         self.func_cnt += 1
         """
         fibo
@@ -71,7 +72,7 @@ class Recursive:
         value = self.func5(n - 1, position + "left") + self.func5(n - 2, position + "right")
         print("position,n,value:{},{},{}".format(position,n,value))
         return value
-# rest 
+
     def func6(self, n, position = ""):
         num = 50
         f = np.zeros(num)
@@ -110,14 +111,14 @@ def main():
     # 
     recrusive = Recursive()
     # recrusive.func7(49)
-    recrusive.func7(6)
-    print("calc cnt:{}".format(recrusive.func_cnt))
-    for v in recrusive.answer_memos:
-        print("v:{}".format(v))
+    # recrusive.func7(6)
+    # print("calc cnt:{}".format(recrusive.func_cnt))
+    # for v in recrusive.answer_memos:
+    #     print("v:{}".format(v))
 
     # recrusive.func6(6)
     # print("calc cnt:{}".format(recrusive.func_cnt))
-    # recrusive.func5(6)
+    recrusive.func5(6)
     # print("calc cnt:{}".format(recrusive.func_cnt))
     # gcd = recrusive.func4(99, 48)
     # print("gcd: {}".format(gcd))
