@@ -24,6 +24,7 @@ class BaseApi:
         if response.status_code == 200:
             data = response.json()
             print(data)
+            print(response.text)
         else:
             print(response)
             print(f"Error: {response.status_code}")

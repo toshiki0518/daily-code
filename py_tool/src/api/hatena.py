@@ -1,6 +1,8 @@
 import sys
-import requests
 from basic import BaseApi
+import requests
+from requests.auth import HTTPBasicAuth
+from requests_oauthlib import OAuth2Session
 
 class HatenaApi(BaseApi):
     pass
@@ -22,10 +24,20 @@ class HatenaApi(BaseApi):
         self.url = url
         self.get()
 
+    def get_user(self):
+        self.authentification()
+        self.url = "http://n.hatena.com/applications/my.json"
+        self.get()
+
+    def authentification(self):
+        self.url = "https://www.hatena.com/oauth/initiate"
+        self.get()
+
 def main():
     url = "https://httpbin.org/get"
     api = HatenaApi(url)
-    api.get_service()
+    api.get_user()
+    # api.get_service()
     print("test")
 
 if __name__ == "__main__":

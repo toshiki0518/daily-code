@@ -15,6 +15,8 @@ RUN python3 -m venv /venv
 RUN /venv/bin/pip install graphviz
 RUN /venv/bin/pip install numpy
 RUN /venv/bin/pip install requests
+RUN /venv/bin/pip install requests requests-oauthlib
+
 
 # 仮想環境内のPythonバイナリへのパスを通す
 ENV PATH="/venv/bin:$PATH"
