@@ -10,8 +10,8 @@ class HatenaApi(BaseApi):
 
     def test(self):
         # OAuthクライアント情報
-        consumer_key = 'BmOlklAt4Lrriw=='
-        consumer_secret = 'kv79VdV5iSU5CIBm5oVS8E0zgk8='
+        consumer_key = 'consumer_key'
+        consumer_secret = 'sercret_key'
         access_token = 'YOUR_ACCESS_TOKEN'
         access_token_secret = 'YOUR_ACCESS_TOKEN_SECRET'
 
