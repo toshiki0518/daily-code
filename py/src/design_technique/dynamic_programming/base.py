@@ -15,17 +15,21 @@ class Frog:
         return scaffolds
     
     def get_jump_cost(self):
-        jump_cost = 0
+        total_jump_cost = 0
         current = 0
-        goal = len(self.scaffolds)
-        while current < goal:
+        goal = len(self.scaffolds) - 1
+        while True:
             current_height = self.scaffolds[current]
             next_jump = random.randint(1, 2)
-            next_position = min(current + next_jump, goal - 1)  # 次のジャンプ後の位置
+            next_position = min(current + next_jump, goal)  # 次のジャンプ後の位置
             next_height = self.scaffolds[next_position]
-            jump_cost += abs(current_height - next_height)
+            jump_cost = abs(current_height - next_height)
+            total_jump_cost += jump_cost
+            print("total:{},current:{} - {}".format(total_jump_cost, current_height, next_height))
             current = next_position
-        return jump_cost
+            if current >= goal:
+                break
+        return total_jump_cost
 
     pass
 
