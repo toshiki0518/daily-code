@@ -14,6 +14,7 @@ class Frog:
             scaffolds.append(height)
         return scaffolds
     
+    
     def get_jump_cost(self):
         total_jump_cost = 0
         current = 0
