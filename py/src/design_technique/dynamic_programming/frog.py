@@ -101,7 +101,7 @@ class Frog:
         compare_value = jump_cost_list[position] + self._calc_jump_cost(position + jump_distance, position)
         if(current_value > compare_value):
             # update minumum value
-            jump_cost_list[position] = compare_value
+            jump_cost_list[position + jump_distance] = compare_value
 
     def get_total_min_jump_cost_with_relaxation(self, is_pulled_base = True) -> int:
         """
@@ -114,18 +114,20 @@ class Frog:
         list_length = len(self.scaffolds)
         jump_cost_list = [self.INF] * list_length
         jump_cost_list[0] = 0
-        jump_cost_list.append(self._calc_jump_cost(0, 1))
+        # jump_cost_list.append(self._calc_jump_cost(0, 1))
 
         if is_pulled_base:
+            print("pulled_base")
             for i in range(1, len(self.scaffolds)):
                 self._update_min_pulled_base(jump_cost_list, i, 1)
-                if i > 2:
+                if i > 1:
                     self._update_min_pulled_base(jump_cost_list, i, 2)
         else:
-            for i in range(1, len(self.scaffolds)):
+            print("pushed_base")
+            for i in range(len(self.scaffolds)):
                 if i + 1 < list_length:
                     self._update_min_pushed_base(jump_cost_list, i, 1)
-                if i > 2:
+                if i + 2 < list_length:
                     self._update_min_pushed_base(jump_cost_list, i, 2)
         self.jump_cost_list = jump_cost_list
         self.show_result()
@@ -139,6 +141,7 @@ class Frog:
     def get_total_min_jump_cost_with_recursion(self):
         self.jump_cost_list = [self.INF] * len(self.scaffolds)
         jump_cost = self._calc_with_recursion()
+        print("cost:{}".format(jump_cost))
 
 
     def _calc_with_recursion(self,position: int) -> int:
@@ -147,8 +150,15 @@ class Frog:
         if position == 0:
             return 0
         result = self.INF
-        self.jump_cost_list[position] = 0
-    
+        result = min(result, self._calc_with_recursion(position - 1) + abs(self.scaffolds[position] - self.scaffolds[position -1]))
+        if position > 1:
+            result = min(result, self._calc_with_recursion(position - 1) + abs(self.scaffolds[position] - self.scaffolds[position -1]))
+        self.jump_cost_list[position] = result
+        
+    def check(self):
+        self.get_total_min_jump_cost_p1()
+        self.get_total_min_jump_cost_with_relaxation(True)
+        self.get_total_min_jump_cost_with_relaxation(False)
 
 def main():
     frog = Frog(True)
@@ -156,6 +166,8 @@ def main():
     frog = Frog(True)
     frog.get_total_min_jump_cost_with_relaxation(True)
     frog.get_total_min_jump_cost_with_relaxation(False)
+    frog = Frog(True)
+    frog.get_total_min_jump_cost_with_relaxation()
 
 if __name__ == "__main__":
     main()
