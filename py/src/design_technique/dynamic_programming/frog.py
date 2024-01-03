@@ -139,26 +139,35 @@ class Frog:
         print("cost:{}".format(self.jump_cost_list[-1:]))
 
     def get_total_min_jump_cost_with_recursion(self):
-        self.jump_cost_list = [self.INF] * len(self.scaffolds)
-        jump_cost = self._calc_with_recursion()
+        list_length = len(self.scaffolds)
+        self.jump_cost_list = [self.INF] * list_length
+        jump_cost = self._calc_with_recursion(list_length - 1)
         print("cost:{}".format(jump_cost))
+        self.show_result()
 
 
-    def _calc_with_recursion(self,position: int) -> int:
+    def _calc_with_recursion(self, position: int) -> int:
         if self.jump_cost_list[position] < self.INF:
+            print("have result:{}".format(position))
             return self.jump_cost_list[position]
         if position == 0:
             return 0
         result = self.INF
-        result = min(result, self._calc_with_recursion(position - 1) + abs(self.scaffolds[position] - self.scaffolds[position -1]))
+        print("position:{}".format(position))
+        value1 = self._calc_with_recursion(position - 1) + abs(self.scaffolds[position] - self.scaffolds[position -1])
+        result = min(result, value1)
         if position > 1:
-            result = min(result, self._calc_with_recursion(position - 1) + abs(self.scaffolds[position] - self.scaffolds[position -1]))
+            value2 = self._calc_with_recursion(position - 2) + abs(self.scaffolds[position] - self.scaffolds[position - 2])
+            result = min(result, value2)
         self.jump_cost_list[position] = result
-        
+        return result
+    
     def check(self):
-        self.get_total_min_jump_cost_p1()
-        self.get_total_min_jump_cost_with_relaxation(True)
-        self.get_total_min_jump_cost_with_relaxation(False)
+        # self.get_total_min_jump_cost_p1()
+        # self.get_total_min_jump_cost_with_relaxation(True)
+        # self.get_total_min_jump_cost_with_relaxation(False)
+        self.get_total_min_jump_cost_with_recursion()
+        
 
 def main():
     frog = Frog(True)
