@@ -1,0 +1,4 @@
+# .gitignore
+
+# Ignore compiled Python files
+*.pyc
