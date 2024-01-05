@@ -53,6 +53,9 @@ class Knapsack():
         print("dp[n]:", dp[n])
         print("Optimal Value:", result)
 
+    def edit_distance(self):
+        # wip
+        pass
 
     def check(self):
         pass
