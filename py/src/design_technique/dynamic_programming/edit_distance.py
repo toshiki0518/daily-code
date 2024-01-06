@@ -1,8 +1,24 @@
-class Knapsack():
+class EditDistance():
     def __init__(self) -> None:
         self.max_weight = 0
         self.weight_value_list = self._create_weight_value_list()
         self._total_weight()
+        self.str_S = ""
+        self.str_T = ""
+        self._set_str_sample()
+        self.str_T = ""
+        self.number_of_operations = 0
+        
+    def _set_str_sample1(self):
+        self.str_S = "bag"
+        self.str_T = "big"
+
+    def _set_str_sample2(self):
+        self.str_S = "kodansha"
+        self.str_T = "danshari"
+
+    def measure_similarity(self):
+        pass
 
     def _create_weight_value_list(self):
         weight_value_list = []
