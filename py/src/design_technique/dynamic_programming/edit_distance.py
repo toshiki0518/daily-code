@@ -6,7 +6,9 @@ class EditDistance():
         self.str_S = ""
         self.str_T = ""
         self._set_str_sample()
-
+        self.str_T = ""
+        self.number_of_operations = 0
+        
     def _set_str_sample1(self):
         self.str_S = "bag"
         self.str_T = "big"
@@ -17,7 +19,7 @@ class EditDistance():
 
     def measure_similarity(self):
         pass
-    
+
     def _create_weight_value_list(self):
         weight_value_list = []
         # sample1
