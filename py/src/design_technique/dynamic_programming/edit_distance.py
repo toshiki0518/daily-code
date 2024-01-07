@@ -1,86 +1,79 @@
 class EditDistance():
     def __init__(self) -> None:
-        self.max_weight = 0
-        self.weight_value_list = self._create_weight_value_list()
-        self._total_weight()
         self.str_S = ""
         self.str_T = ""
-        self._set_str_sample()
-        self.str_T = ""
         self.number_of_operations = 0
-        
-    def _set_str_sample1(self):
+
+    def _check_equal(self):
+        print("s:{},t:{}".format(self.str_S,self.str_T))
+        if self.str_S == self.str_T:
+            print("equal")
+        else:
+            print("not equal")
+
+    def _count_edit_distance(self):
+        self.number_of_operations += 1
+        print(self.number_of_operations)
+        self._check_equal()
+
+    def _change(self, target_str, position, change_str):
+        after_str =""
+        if 0 <= position < len(target_str):
+            after_str = target_str[:position] + change_str + target_str[position + 1:]
+        else:
+            after_str = target_str
+        return after_str     
+
+    def _delete(self, target_str, position):
+        modified_str = target_str[:position] + target_str[position + 1:]
+        return modified_str
+
+    def _insert(self, target_str: str, position: int, insert_value: str):
+        inserted_str = target_str[:position] + insert_value + target_str[position:]
+        return inserted_str
+
+    def _sample1(self):
+        self.number_of_operations = 0
         self.str_S = "bag"
         self.str_T = "big"
 
-    def _set_str_sample2(self):
+    def _sample2(self):
+        self.number_of_operations = 0
         self.str_S = "kodansha"
         self.str_T = "danshari"
 
+    def _sample3(self):
+        self.number_of_operations = 0
+        self.str_S = "logistic"
+        self.str_T = "algorithm"
+        self.str_S = self._insert(self.str_S, 0, "a")
+        self._count_edit_distance()
+        self.str_S = self._insert(self.str_S, 2, "g")
+        self._count_edit_distance()
+        self.str_S = self._change(self.str_S, 4, "r")
+        self._count_edit_distance()
+        self.str_S = self._delete(self.str_S, 6)
+        self._count_edit_distance()
+        self.str_S = self._change(self.str_S, 7, "h")
+        self._count_edit_distance()
+        self.str_S = self._change(self.str_S, 8, "m")
+        self._count_edit_distance()
+
     def measure_similarity(self):
-        pass
-
-    def _create_weight_value_list(self):
-        weight_value_list = []
-        # sample1
-        # weight_value_list.append((2, 3))
-        # weight_value_list.append((1, 2))
-        # weight_value_list.append((3, 6))
-        # weight_value_list.append((2, 1))
-        # weight_value_list.append((1, 3))
-        # weight_value_list.append((5, 85))
-
-        # sample2
-        weight_value_list.append((4, 3))
-        weight_value_list.append((6, 2))
-        weight_value_list.append((2, 6))
-        weight_value_list.append((3, 1))
-        weight_value_list.append((2, 3))
-        # weight_value_list.append((9, 85))
-
-        print(len(weight_value_list))
-        print(weight_value_list)
-        return weight_value_list
-
-    def _total_weight(self):
-        # weight_value_listのすべての要素の重さの合計を算出
-        total_weight = sum(weight for weight, _ in self.weight_value_list)
-        print("total_weight:{}".format(total_weight))
-        total_value = sum(value for _, value in self.weight_value_list)
-        print("total_value:{}".format(total_value))
-        return total_weight
-
-    def calc(self):
-        n = len(self.weight_value_list)
-        dp = [[0] * (self.max_weight + 1) for _ in range(n + 1)]
-
-        for i in range(1, n + 1):
-            for w in range(self.max_weight + 1):
-                weight_i, value_i = self.weight_value_list[i - 1]
-                if w >= weight_i:
-                    dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weight_i] + value_i)
-                else:
-                    dp[i][w] = dp[i - 1][w]
-
-        # 最適な結果を出力
-        result = dp[n][self.max_weight]
-        print("dp:", dp)
-        print("n:", n)
-        print("dp[n]:", dp[n])
-        print("Optimal Value:", result)
+        self._sample3()
 
     def edit_distance(self):
         # wip
         pass
 
     def check(self):
+        self.measure_similarity()
         pass
 
 def main():
     print("knapsack")
-    knapsack = Knapsack()
-    knapsack.max_weight = 11 # ナップサックの容量を設定
-    knapsack.calc()
+    edit_distance = EditDistance()
+    edit_distance.measure_similarity()
 
 if __name__ == "__main__":
     main()
