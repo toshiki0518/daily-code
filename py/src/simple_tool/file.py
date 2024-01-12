@@ -1,3 +1,4 @@
+import csv
 class File:
     def __init__(self) -> None:
         pass
@@ -21,9 +22,19 @@ class File:
             with open(copy_file_name, 'w') as destination_file:
                 for line in source_file:
                     destination_file.write(line)
+
+    def read_csv(self, target):
+        with open(target, newline='') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+            for row in spamreader:
+                spamreader
+                print(','.join(row))
+
 def main():
     file = File()
     target = 'write_workfile'
+    file.read_csv('test.csv')
+    return 
     file.write_introduction(target)
     file.read_introduction(target)
     file.copy_introduction(target, 'copy_write_workfile')
