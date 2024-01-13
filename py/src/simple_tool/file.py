@@ -17,6 +17,12 @@ class File:
         # We can check that the file has been automatically closed.
         f.closed
 
+    def write(self, file_name):
+        with open(file_name, mode="w" ,encoding="utf-8") as f:
+            f.write('This is a test.\nThis is a test\n')
+        # We can check that the file has been automatically closed.
+        f.closed
+
     def copy_introduction(self, original_file_name, copy_file_name):
         with open(original_file_name, 'r') as source_file:
             with open(copy_file_name, 'w') as destination_file:
@@ -34,6 +40,7 @@ def main():
     file = File()
     target = 'write_workfile'
     file.read_csv('test.csv')
+    file.write('test.csv')
     return 
     file.write_introduction(target)
     file.read_introduction(target)
