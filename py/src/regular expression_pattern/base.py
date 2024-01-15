@@ -28,11 +28,14 @@ def detect_number(value):
     re.detect_numbers(value)
     print()
 
-def main():
+def check_detect_number():
     detect_number("1")
     detect_number("b2")
     detect_number("34")
     detect_number("a")
+
+def main():    
+    check_detect_number()   
 
 if __name__ == "__main__":
     main()
