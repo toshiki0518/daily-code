@@ -1,36 +1,36 @@
 # sh env/git.sh user_name email
-# 引数の数を確認
+# Check the number of arguments
 if [ "$#" -ne 2 ]; then
-  echo "引数エラー: ユーザー名とメールアドレスを指定してください"
-  echo "例: $0 user_name user_mail"
+  echo "Argument error: Please specify both the username and email address."
+  echo "Example: $0 user_name user_mail"
   exit 1
 fi
 
-apt-get update;
-rm daily-code -rf;
-apt-get -y purge git;
-apt-get -y install git;
-git --version;
+apt-get update
+rm daily-code -rf
+apt-get -y purge git
+apt-get -y install git
+git --version
 
 echo "Setting up Git with Personal Access Token..."
-# パーソナルアクセストークンの入力を非表示にするために -s オプションを使用
+# Use the -s option to hide the input of the Personal Access Token
 echo -n "Enter your Personal Access Token: "
-read -s token;
-echo;
+read -s token
+echo
 
-# Gitユーザー設定
-git config --global user.name "$1";
-git config --global user.email "$2";
-git config --global credential.helper store   # credential.helper を store に設定することで、認証情報を保存する
+# Git user configuration
+git config --global user.name "$1"
+git config --global user.email "$2"
+git config --global credential.helper store   # Set credential.helper to store to save authentication information
 
-# 設定値の確認
-echo "ユーザー名: $(git config --get user.name)";
-echo "メールアドレス: $(git config --get user.email)";
+# Confirm configuration values
+echo "Username: $(git config --get user.name)"
+echo "Email: $(git config --get user.email)"
 
-# パーソナルアクセストークンを含むURLを生成
+# Generate URL with Personal Access Token
 git_url="https://$username:$token@github.com/toshiki0518/daily-code.git"
 
-# パーソナルアクセストークンを含むURLでリポジトリをクローン
+# Clone the repository using the URL with Personal Access Token
 git clone $git_url
 
-echo "Git has been configured and repository has been cloned."
+echo "Git has been configured, and the repository has been cloned."
