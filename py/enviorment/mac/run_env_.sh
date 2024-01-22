@@ -2,9 +2,13 @@
 
 # Dockerコンテナ停止
 docker-compose down --rmi all --volumes --remove-orphans
+docker stop $(docker ps -q) && docker rm $(docker ps -aq)
 
 # Dockerコンテナのビルドと起動
 docker-compose -f ../docker-compose.yml up -d --build
+
+echo "start linux"
+
 
 echo "start python"
 
