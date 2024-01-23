@@ -54,9 +54,23 @@ class RegularExpression:
             print("No match found.")
 
 
+    def _detect_email(self):
+        email = self.value
+        # メールアドレスの正規表現パターン
+        pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+
+        # 正規表現にマッチするかどうかを確認
+        if re.match(pattern, email):
+            print(f"{email} は有効なメールアドレスです。")
+            return True
+        else:
+            print(f"{email} は無効なメールアドレスです。")
+            return False
+
     def validate(self, value):
         self.value = value
-        self._detect_date()
+        self._detect_email()
+        # self._detect_date()
         # self._detect_number()
         # self._detect_numbers()
         # self._detect_alphabet()
@@ -64,6 +78,13 @@ class RegularExpression:
 
 def _get_values():
     values = []
+    values.append("example1@email.com")
+    values.append("example2.email@domain.com")
+    values.append("example3@invalid_domain")
+    values.append("example4@domain_with_underscores.com")
+    values.append("example5.email@longtopleveldomain")
+    return values
+
     values.append("2024/01/22")
     return values
     # values.append("1")
