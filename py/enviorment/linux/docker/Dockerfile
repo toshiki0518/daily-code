@@ -24,4 +24,5 @@ WORKDIR /home/app
 # RUN pip --version
 # WORKDIR /home/app/src
 # RUN apt-get install -y vim
-# RUN PS1="\u\$ "
+# RUN PS1="\u@\$(basename \$(pwd))\$ "
+

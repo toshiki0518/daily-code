@@ -7,10 +7,7 @@ docker stop $(docker ps -q) && docker rm $(docker ps -aq)
 # Dockerコンテナのビルドと起動
 docker-compose -f ../docker-compose.yml up -d --build
 
-echo "start linux"
-
-
-echo "start python"
+echo "start linux and python"
 
 # DockerコンテナのIDを取得
 HOGE=$(docker ps -q)

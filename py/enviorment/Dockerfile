@@ -23,4 +23,5 @@ ENV PATH="/venv/bin:$PATH"
 RUN pip --version
 WORKDIR /home/app/src
 RUN apt-get install -y vim
-RUN PS1="\u\$ "
+RUN echo PS1="\u@\$(basename \$(pwd))\$ "
+
