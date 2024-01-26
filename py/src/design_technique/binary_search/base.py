@@ -1,3 +1,5 @@
+import bisect
+
 class BaseBinarySearch:
     def __init__(self) -> None:
         pass
@@ -25,6 +27,13 @@ class ArrayBinarySearch(BaseBinarySearch):
             # print("after mid:{},left:{},right:{}".format(mid,left, right))
         return -1
 
+    def bisect(self):
+        arr = [1, 2, 4, 4, 4, 6, 8, 10]
+
+        # 4を挿入するべき位置（最も左の位置）を求める
+        position = bisect.bisect_left(arr, 4)
+        print(position)  # 出力: 2
+
     def exec(self, search_value=9):
         self.search_value = search_value
         print("answer: {}".format(self._search()))
@@ -32,11 +41,14 @@ class ArrayBinarySearch(BaseBinarySearch):
 
 def main():
     abs = ArrayBinarySearch()
-    abs.exec()
-    abs.exec(5)
-    abs.exec(39)
-    abs.exec(8)
-    abs.exec(1000)
+    abs.bisect()
+    # abs.exec(10)
+    # abs.exec(3)
+    # abs.exec(39)
+
+    # abs.exec(-100)
+    # abs.exec(9)
+    # abs.exec(1000)
 
 if __name__ == "__main__":
     main()
