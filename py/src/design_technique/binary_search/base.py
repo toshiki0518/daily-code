@@ -38,10 +38,35 @@ class ArrayBinarySearch(BaseBinarySearch):
         self.search_value = search_value
         print("answer: {}".format(self._search()))
         
+    def common_binary_search(self):
+        """
+        各整数xについて
+        true/falseの２値で判定される条件Pが与えられていて
+        ある整数l,r(l<r)が存在。
+        ・P(l)=false
+        ・P(r)=true
+        ・ある整数M(l<M<=r)が存在して、x<Mなるxに対してP(x)=falseであり
+        x>=Mなるxに対してP(x)=trueである
+        このときD=r-lとして、二分探索法はMをO(logD)の計算量で求めることができる
+        """
+        left: int
+        right: int
+        while (right - left) > 1:
+            mid = left + (right - left) / 2
+            if self._p(mid):
+                right = mid
+            else:
+                left = mid
+        return right
 
+    def _p(self, x: int) -> bool:
+
+        pass
+    
 def main():
     abs = ArrayBinarySearch()
-    abs.bisect()
+    abs.binary_search()
+    # abs.bisect()
     # abs.exec(10)
     # abs.exec(3)
     # abs.exec(39)
