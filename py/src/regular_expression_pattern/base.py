@@ -67,17 +67,51 @@ class RegularExpression:
             print(f"{email} は無効なメールアドレスです。")
             return False
 
+    def _detext_html(self):
+        html_doc = self.value
+        # HTML内のリンクを抽出する正規表現パターン
+        link_pattern = re.compile(r'<a\s+(?:[^>]*?\s+)?href="([^"]*)"')
+
+        # HTML内のリンクを抽出
+        links = link_pattern.findall(html_doc)
+
+        has_link = False
+        # 抽出されたリンクを表示
+        for link in links:
+            print("Link:", link)
+            has_link = True
+
+        return has_link
+
     def validate(self, value):
         self.value = value
-        self._detect_email()
+        self._detext_html()
+        # self._detect_email()
         # self._detect_date()
         # self._detect_number()
         # self._detect_numbers()
         # self._detect_alphabet()
         # self._detect_alphabets()
 
+def _get_html():
+    html_doc = """
+    <html>
+    <head>
+    <title>Sample HTML</title>
+    </head>
+    <body>
+    <h1>Heading</h1>
+    <p>This is a paragraph with <a href="https://example.com">a link</a>.</p>
+    <p>Another paragraph with <a href="https://example2.com">another link</a>.</p>
+    </body>
+    </html>
+    """
+    return html_doc
+
 def _get_values():
     values = []
+    values.append(_get_html())
+    return values    
     values.append("example1@email.com")
     values.append("example2.email@domain.com")
     values.append("example3@invalid_domain")
