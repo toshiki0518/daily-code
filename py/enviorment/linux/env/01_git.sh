@@ -15,7 +15,7 @@ git --version
 echo "Setting up Git with Personal Access Token..."
 # Use the -s option to hide the input of the Personal Access Token
 echo -n "Enter your Personal Access Token: "
-read -s token
+read token
 echo
 
 # Git user configuration
