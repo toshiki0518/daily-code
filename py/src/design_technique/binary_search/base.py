@@ -9,7 +9,7 @@ class ArrayBinarySearch(BaseBinarySearch):
         super().__init__()
         self.search_value = search_value
         self.sorted_array = [3,5,8,10,14,17,21,39]
-        print(self.sorted_array)
+        # print(self.sorted_array)
 
     def _search(self):
         left = 0
@@ -60,12 +60,41 @@ class ArrayBinarySearch(BaseBinarySearch):
         return right
 
     def _p(self, x: int) -> bool:
-
         pass
-    
+
+    def age_quiz(self, a_age=31):
+        """
+        a age is between 20 and 36
+        you have four chanse for question that answer yes or no.
+        """
+        left = 20
+        right = 36
+        while (right - left) > 1:
+            mid = left + (right - left) // 2
+            if a_age < mid:
+                ans = "yes"
+            else:
+                ans = "no"
+            print("is the age less than {}? {}.".format(mid, ans))
+            if a_age == left:
+                print("hit!")
+                break
+            if ans == "yes":
+                right = mid
+            else:
+                left = mid
+
+        print("the age is {} !".format(left))
+        print()
+
 def main():
     abs = ArrayBinarySearch()
-    abs.binary_search()
+    abs.age_quiz()
+    abs.age_quiz(34)
+    abs.age_quiz(25)
+    abs.age_quiz(28)
+    abs.age_quiz(24)
+    # abs.binary_search()
     # abs.bisect()
     # abs.exec(10)
     # abs.exec(3)
