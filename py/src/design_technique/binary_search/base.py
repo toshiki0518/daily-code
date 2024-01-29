@@ -84,6 +84,7 @@ class ArrayBinarySearch(BaseBinarySearch):
             else:
                 left = mid
 
+                
         print("the age is {} !".format(left))
         print()
 
