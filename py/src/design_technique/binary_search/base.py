@@ -87,6 +87,8 @@ class ArrayBinarySearch(BaseBinarySearch):
         print("the age is {} !".format(left))
         print()
 
+    def std_lower_bound(self):
+        pass
 def main():
     abs = ArrayBinarySearch()
     abs.age_quiz()
