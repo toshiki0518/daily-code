@@ -1,4 +1,5 @@
 import bisect
+import random
 
 class BaseBinarySearch:
     def __init__(self) -> None:
@@ -87,8 +88,32 @@ class ArrayBinarySearch(BaseBinarySearch):
         print("the age is {} !".format(left))
         print()
 
+    def _generate_random_number(self):
+        return random.randint(1, 10)
+        
+        
+    def std_lower_bound(self, N=5, K=7):
+        min_value = 20000000
+        a_list = []
+        b_list = []
+        for _ in range(N):
+            a_list.append(self._generate_random_number())
+            b_list.append(self._generate_random_number())
+        print(b_list)
+        # bをソート
+        b_list.sort()
+        print(b_list)
+        # aを固定して解く
+        for i in range(N):
+            iter = bisect()
+
+        pass
+
+
 def main():
     abs = ArrayBinarySearch()
+    abs.std_lower_bound()
+    return 
     abs.age_quiz()
     abs.age_quiz(34)
     abs.age_quiz(25)
