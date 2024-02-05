@@ -90,6 +90,7 @@ class ArrayBinarySearch(BaseBinarySearch):
 
     def _generate_random_number(self):
         return random.randint(1, 10)
+    
         
     def std_lower_bound(self, N=5, K=7):
         min_value = 20000000
@@ -109,6 +110,8 @@ class ArrayBinarySearch(BaseBinarySearch):
 
 
         pass
+
+
 
 
 def main():
