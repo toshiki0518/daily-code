@@ -6,6 +6,8 @@ FROM debian
 ENV PYTHONUNBUFFERED 1
 RUN apt update
 # RUN apt-get install apache2
+# RUN apt-get install -y git
+# RUN apt-get install -y gh
 RUN apt-get install -y pip
 RUN apt-get install -y python3-venv
 RUN python3 -m venv /venv
